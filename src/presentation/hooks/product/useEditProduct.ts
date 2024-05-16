@@ -1,20 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct } from '../../../actions';
+import { EditProduct } from '../../../actions';
 import {
 	NavigationProp,
 	useNavigation,
 } from '@react-navigation/native';
 import { RootStackParams } from '../../navigation/StackNavigator';
 
-export const useCreateProduct = () => {
+export const useEditProduct = () => {
 	const queryClient = useQueryClient();
 	const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
 	const { data, isPending, mutate, isSuccess } = useMutation({
-		mutationFn: createProduct,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['products'] });
-			navigation.navigate('Home');
+		mutationFn: EditProduct,
+		onSuccess: data => {
+			queryClient.invalidateQueries({
+				queryKey: ['products'],
+			});
+			navigation.navigate('Product', { product: data });
 		},
 	});
 

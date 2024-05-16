@@ -13,6 +13,7 @@ interface Props {
 	rules: RegisterOptions;
 	errors: FieldErrors<Product>;
 	label: string;
+	editable?: boolean;
 }
 
 export default function InputText({
@@ -21,6 +22,7 @@ export default function InputText({
 	rules,
 	errors,
 	label,
+	editable = true,
 }: Props) {
 	return (
 		<View style={styles.containerInput}>
@@ -34,10 +36,18 @@ export default function InputText({
 						style={[
 							styles.input,
 							errors[name] && { borderColor: 'red' },
+							editable
+								? { color: '#000' }
+								: {
+										color: '#C9C9CA',
+										backgroundColor: '#f6f6f6',
+										opacity: 0.5,
+								  },
 						]}
 						onChangeText={onChange}
 						value={value}
 						onBlur={onBlur}
+						editable={editable}
 					/>
 				)}
 				name={name}

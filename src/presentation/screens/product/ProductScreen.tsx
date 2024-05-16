@@ -1,10 +1,4 @@
-import {
-	View,
-	Text,
-	StyleSheet,
-	Image,
-	ScrollView,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import MainLayout from '../../layout/MainLayout';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigation/StackNavigator';
@@ -14,7 +8,7 @@ import { Formatter } from '../../helpers/formatter';
 interface Props
 	extends StackScreenProps<RootStackParams, 'Product'> {}
 
-export default function ProductScreen({ route }: Props) {
+export default function ProductScreen({ route, navigation }: Props) {
 	const { product } = route.params;
 
 	return (
@@ -41,7 +35,14 @@ export default function ProductScreen({ route }: Props) {
 			</View>
 
 			<View style={{ gap: 12 }}>
-				<Button text='Editar' onPress={() => {}} />
+				<Button
+					text='Editar'
+					onPress={() =>
+						navigation.navigate('EditProduct', {
+							product,
+						})
+					}
+				/>
 				<Button
 					text='Eliminar'
 					onPress={() => {}}

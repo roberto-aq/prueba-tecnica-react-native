@@ -14,11 +14,6 @@ import { productValidationRules } from '../../validations/productValidation';
 import { Product } from '../../types/Product';
 
 import { useCreateProduct } from '../../hooks';
-import {
-	NavigationProp,
-	useNavigation,
-} from '@react-navigation/native';
-import { RootStackParams } from '../../navigation/StackNavigator';
 
 export default function AddProductScreen() {
 	const {
@@ -31,8 +26,7 @@ export default function AddProductScreen() {
 		watch,
 	} = useForm<Product>();
 
-	const { mutate, isSuccess, isPending } = useCreateProduct();
-	const navigation = useNavigation<NavigationProp<RootStackParams>>();
+	const { mutate, isPending } = useCreateProduct();
 
 	const dateRelease = watch('date_release');
 
