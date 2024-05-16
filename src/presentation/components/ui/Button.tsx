@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 	},
 	text: {
-        fontWeight: '500',
+        fontWeight: '700',
         fontSize: 16,
     },
 });
