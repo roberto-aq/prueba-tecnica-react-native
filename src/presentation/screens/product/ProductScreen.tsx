@@ -1,8 +1,9 @@
 import { View, Text } from 'react-native';
+import MainLayout from '../../layout/MainLayout';
 export default function ProductScreen() {
 	return (
-		<View>
+		<MainLayout>
 			<Text>ProductScreen</Text>
-		</View>
+		</MainLayout>
 	);
 }

@@ -1,30 +1,20 @@
 import { PropsWithChildren } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { ContainerLogo } from '../components';
 
 export default function MainLayout({ children }: PropsWithChildren) {
 	return (
 		<View style={{ flex: 1, backgroundColor: 'white' }}>
+			<ContainerLogo />
 			<View
 				style={{
-					width: '100%',
-					height: 60,
-					alignItems: 'center',
-					justifyContent: 'center',
-					borderWidth: 1,
-					borderColor: '#eee',
+					marginHorizontal: 25,
+					marginBottom: 60,
+					flex: 1,
 				}}
 			>
-				<Text
-					style={{
-						fontSize: 25,
-						fontWeight: 'bold',
-						textTransform: 'uppercase',
-					}}
-				>
-					Banco
-				</Text>
+				{children}
 			</View>
-			{children}
 		</View>
 	);
 }
