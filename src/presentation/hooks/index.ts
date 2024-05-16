@@ -5,3 +5,6 @@ export * from './products/useProducts';
 export * from './product/useCreateProduct';
 export * from './product/useEditProduct';
 export * from './product/useDeleteProduct';
+
+// Search
+export * from './search/useFilteredProducts';

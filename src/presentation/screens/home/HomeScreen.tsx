@@ -6,7 +6,7 @@ import {
 	FlatList,
 } from 'react-native';
 import MainLayout from '../../layout/MainLayout';
-import { useProducts } from '../../hooks';
+import { useFilteredProducts, useProducts } from '../../hooks';
 import { Button, ProductList } from '../../components';
 import {
 	NavigationProp,
@@ -17,15 +17,23 @@ import { RootStackParams } from '../../navigation/StackNavigator';
 export default function HomeScreen() {
 	const { products, isLoading } = useProducts();
 
+	const { filteredProducts, searchTerm, setSearchTerm } =
+		useFilteredProducts(products);
+
 	const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
 	return (
 		<MainLayout>
 			<View style={styles.containerTextInput}>
-				<TextInput placeholder='Search..' style={styles.textInput} />
+				<TextInput
+					placeholder='Search by name..'
+					style={styles.textInput}
+					value={searchTerm}
+					onChangeText={term => setSearchTerm(term)}
+				/>
 			</View>
 
-			<ProductList products={products} />
+			<ProductList products={filteredProducts} />
 
 			<Button
 				text='Agregar'

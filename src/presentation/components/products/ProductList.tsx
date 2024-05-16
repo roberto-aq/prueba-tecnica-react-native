@@ -11,7 +11,7 @@ export default function ProductList({ products }: Props) {
 		<FlatList
 			data={products}
 			keyExtractor={item => item.id}
-			renderItem={({ item, index, separators }) => (
+			renderItem={({ item, index }) => (
 				<ProductItem
 					product={item}
 					style={
@@ -19,6 +19,8 @@ export default function ProductList({ products }: Props) {
 							? {
 									borderTopLeftRadius: 10,
 									borderTopEndRadius: 10,
+									borderBottomWidth: products.length === 1 ? 1 : 0,
+									borderRadius: products.length === 1 ? 10 : 0,
 							  }
 							: index === products.length - 1 && {
 									borderBottomLeftRadius: 10,
