@@ -1,15 +1,33 @@
+import { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import MainLayout from '../../layout/MainLayout';
 import { StackScreenProps } from '@react-navigation/stack';
+
+import MainLayout from '../../layout/MainLayout';
 import { RootStackParams } from '../../navigation/StackNavigator';
-import { Button, Row } from '../../components';
+import {
+	Button,
+	FullScreenLoader,
+	ModalConfirmationDelete,
+	Row,
+} from '../../components';
 import { Formatter } from '../../helpers/formatter';
+import { useDeleteProduct } from '../../hooks';
 
 interface Props
 	extends StackScreenProps<RootStackParams, 'Product'> {}
 
 export default function ProductScreen({ route, navigation }: Props) {
 	const { product } = route.params;
+	const [modalVisible, setModalVisible] = useState(false);
+
+	const { isPending, mutate } = useDeleteProduct();
+
+	const handleDelete = () => {
+		mutate(product.id);
+		setModalVisible(false);
+	};
+
+	if (isPending) return <FullScreenLoader />;
 
 	return (
 		<MainLayout>
@@ -45,11 +63,18 @@ export default function ProductScreen({ route, navigation }: Props) {
 				/>
 				<Button
 					text='Eliminar'
-					onPress={() => {}}
+					onPress={() => setModalVisible(true)}
 					color='#D50707'
 					textColor='#fff'
 				/>
 			</View>
+
+			<ModalConfirmationDelete
+				visible={modalVisible}
+				onConfirm={handleDelete}
+				onCancel={() => setModalVisible(false)}
+				productName={product.name}
+			/>
 		</MainLayout>
 	);
 }

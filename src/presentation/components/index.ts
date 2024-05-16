@@ -6,6 +6,7 @@ export { default as ProductItem } from './products/ProductItem';
 export { default as Row } from './product/Row';
 export { default as InputText } from './product/InputText';
 export { default as DatePicker } from './product/DatePicker';
+export { default as ModalConfirmationDelete } from './product/ModalConfirmationDelete';
 
 // UI
 export { default as ContainerLogo } from './ui/ContainerLogo';
