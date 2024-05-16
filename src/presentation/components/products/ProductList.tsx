@@ -28,6 +28,7 @@ export default function ProductList({ products }: Props) {
 					}
 				/>
 			)}
+			style={{ marginBottom: 60 }}
 			showsVerticalScrollIndicator={false}
 		/>
 	);

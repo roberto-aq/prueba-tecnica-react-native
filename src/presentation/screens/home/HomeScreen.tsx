@@ -7,10 +7,17 @@ import {
 } from 'react-native';
 import MainLayout from '../../layout/MainLayout';
 import { useProducts } from '../../hooks';
-import { ProductList } from '../../components';
+import { Button, ProductList } from '../../components';
+import {
+	NavigationProp,
+	useNavigation,
+} from '@react-navigation/native';
+import { RootStackParams } from '../../navigation/StackNavigator';
 
 export default function HomeScreen() {
 	const { products, isLoading } = useProducts();
+
+	const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
 	return (
 		<MainLayout>
@@ -19,19 +26,25 @@ export default function HomeScreen() {
 			</View>
 
 			<ProductList products={products} />
+
+			<Button
+				text='Agregar'
+				onPress={() => navigation.navigate('AddProduct')}
+				color='#FFDD00'
+			/>
 		</MainLayout>
 	);
 }
 
 const styles = StyleSheet.create({
 	containerTextInput: {
-		marginVertical: 30,
+		marginTop: 50,
+		marginBottom: 30,
 		borderWidth: 2,
 		borderColor: '#eee',
 		paddingHorizontal: 15,
 		height: 50,
 		borderRadius: 5,
-
 	},
 	textInput: {
 		width: '100%',

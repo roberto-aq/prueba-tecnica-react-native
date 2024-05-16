@@ -9,7 +9,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 			<View
 				style={{
 					marginHorizontal: 25,
-					marginBottom: 60,
+					marginBottom: 50,
 					flex: 1,
 				}}
 			>

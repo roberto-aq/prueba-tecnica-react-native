@@ -3,6 +3,6 @@ export interface ProductResponse {
 	name: string;
 	description: string;
 	logo: string;
-	date_release: Date;
-	date_revision: Date;
+	date_release: string;
+	date_revision: string;
 }

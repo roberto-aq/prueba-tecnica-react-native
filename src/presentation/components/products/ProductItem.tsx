@@ -27,16 +27,18 @@ export default function ProductItem({ product, style }: Props) {
 	return (
 		<Pressable
 			style={[styles.container, style]}
-			onPress={() =>
-				navigation.navigate('Product', { id: product.id })
-			}
+			onPress={() => navigation.navigate('Product', { product })}
 		>
 			<View style={{ flex: 1, gap: 5 }}>
 				<Text style={styles.title}>{product.name}</Text>
 				<Text style={styles.subtitle}>{product.id}</Text>
 			</View>
 
-			<Ionicons name='chevron-forward-outline' size={22} color='#C1C1C3' />
+			<Ionicons
+				name='chevron-forward-outline'
+				size={22}
+				color='#C1C1C3'
+			/>
 		</Pressable>
 	);
 }

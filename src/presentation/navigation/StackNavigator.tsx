@@ -5,10 +5,11 @@ import {
 	HomeScreen,
 	ProductScreen,
 } from '../screens';
+import { ProductResponse } from '../../infrastructure/interfaces/products.responses';
 
 export type RootStackParams = {
 	Home: undefined;
-	Product: { id: string };
+	Product: { product: ProductResponse };
 	AddProduct: undefined;
 	EditProduct: { id: string };
 };
