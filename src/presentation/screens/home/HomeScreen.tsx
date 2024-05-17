@@ -19,10 +19,10 @@ import { useEffect, useState } from 'react';
 
 export default function HomeScreen() {
 	const { products, isLoading, error, isError } = useProducts();
-	const [visible, setVisible] = useState(false);
 
 	const { filteredProducts, searchTerm, setSearchTerm } =
 		useFilteredProducts(products);
+	const { setVisible, visible, closeModal } = useErrorHandler();
 
 	const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
 			<AlertError
 				visible={visible}
 				message={error?.message || ''}
-				onClose={() => setVisible(false)}
+				onClose={closeModal}
 			/>
 		</MainLayout>
 	);
