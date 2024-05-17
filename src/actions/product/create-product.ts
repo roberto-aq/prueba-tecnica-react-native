@@ -1,6 +1,8 @@
+import { AxiosError } from 'axios';
 import { api } from '../../config/api/api';
 import { ProductResponse } from '../../infrastructure/interfaces/products.responses';
 import { Product } from '../../presentation/types/Product';
+import { handleErrorApi } from '../fetchError/handleErrorApi';
 
 export const createProduct = async (
 	product: Product
@@ -20,8 +22,12 @@ export const createProduct = async (
 		const { data } = await api.post('/bp/products', product);
 
 		return data;
-	} catch (error) {
+	} catch (error: any) {
+		handleErrorApi(error as AxiosError);
+		if (error.message === 'Product already exists') {
+			throw new Error('El producto con ese ID ya existe');
+		}
 		console.log(error);
-		throw new Error('Error creating product');
+		throw new Error('Ups, algo salió mal');
 	}
 };

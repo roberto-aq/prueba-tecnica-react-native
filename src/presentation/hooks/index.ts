@@ -8,3 +8,6 @@ export * from './product/useDeleteProduct';
 
 // Search
 export * from './search/useFilteredProducts';
+
+// UI
+export * from './ui/useErrorHandler';

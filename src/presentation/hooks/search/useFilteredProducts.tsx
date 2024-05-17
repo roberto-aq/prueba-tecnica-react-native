@@ -7,11 +7,15 @@ export const useFilteredProducts = (products: Product[]) => {
 		useState<Product[]>(products);
 
 	useEffect(() => {
-		setFilteredProducts(
-			products.filter(product =>
-				product.name.toLowerCase().includes(searchTerm.toLowerCase())
-			)
-		);
+		if (products.length > 0) {
+			setFilteredProducts(
+				products.filter(product =>
+					product.name
+						.toLowerCase()
+						.includes(searchTerm.toLowerCase())
+				)
+			);
+		}
 	}, [searchTerm, products]);
 
 	return { searchTerm, setSearchTerm, filteredProducts };

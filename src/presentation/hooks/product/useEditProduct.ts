@@ -10,20 +10,23 @@ export const useEditProduct = () => {
 	const queryClient = useQueryClient();
 	const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
-	const { data, isPending, mutate, isSuccess } = useMutation({
-		mutationFn: EditProduct,
-		onSuccess: data => {
-			queryClient.invalidateQueries({
-				queryKey: ['products'],
-			});
-			navigation.navigate('Product', { product: data });
-		},
-	});
+	const { data, isPending, mutate, isSuccess, isError, error } =
+		useMutation({
+			mutationFn: EditProduct,
+			onSuccess: data => {
+				queryClient.invalidateQueries({
+					queryKey: ['products'],
+				});
+				navigation.navigate('Product', { product: data });
+			},
+		});
 
 	return {
 		data,
 		isPending,
 		mutate,
 		isSuccess,
+		isError,
+		error,
 	};
 };

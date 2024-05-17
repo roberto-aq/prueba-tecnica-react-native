@@ -1,6 +1,8 @@
+import { AxiosError } from 'axios';
 import { api } from '../../config/api/api';
 import { ProductResponse } from '../../infrastructure/interfaces/products.responses';
 import { Product } from '../../presentation/types/Product';
+import { handleErrorApi } from '../fetchError/handleErrorApi';
 
 export const EditProduct = async (
 	product: Product
@@ -13,7 +15,8 @@ export const EditProduct = async (
 
 		return data;
 	} catch (error) {
+		handleErrorApi(error as AxiosError);
 		console.log(error);
-		throw new Error('Error creating product');
+		throw new Error('Ups, algo salió mal');
 	}
 };

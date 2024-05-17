@@ -1,13 +1,10 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import MainLayout from '../../layout/MainLayout';
 
 export default function FullScreenLoader() {
 	return (
-		<MainLayout>
-			<View style={styles.containerLoader}>
-				<ActivityIndicator size='large' color={'#FFDD00'} />
-			</View>
-		</MainLayout>
+		<View style={styles.containerLoader}>
+			<ActivityIndicator size='large' color={'#FFDD00'} />
+		</View>
 	);
 }
 const styles = StyleSheet.create({

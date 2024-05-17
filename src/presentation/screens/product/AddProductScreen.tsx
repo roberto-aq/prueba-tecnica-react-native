@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import MainLayout from '../../layout/MainLayout';
 import {
+	AlertError,
 	Button,
 	DatePicker,
 	FullScreenLoader,
@@ -14,6 +15,7 @@ import { productValidationRules } from '../../validations/productValidation';
 import { Product } from '../../types/Product';
 
 import { useCreateProduct } from '../../hooks';
+import useErrorHandler from '../../hooks/ui/useErrorHandler';
 
 export default function AddProductScreen() {
 	const {
@@ -26,7 +28,8 @@ export default function AddProductScreen() {
 		watch,
 	} = useForm<Product>();
 
-	const { mutate, isPending } = useCreateProduct();
+	const { mutate, isPending, error, isError } = useCreateProduct();
+	const { closeModal, visible, setVisible } = useErrorHandler();
 
 	const dateRelease = watch('date_release');
 
@@ -42,6 +45,12 @@ export default function AddProductScreen() {
 			);
 		}
 	}, [dateRelease, setValue]);
+
+	useEffect(() => {
+		if (isError) {
+			setVisible(true);
+		}
+	}, [isError]);
 
 	const onSubmit = handleSubmit(data => {
 		mutate(data);
@@ -117,6 +126,11 @@ export default function AddProductScreen() {
 				<Button text='Enviar' onPress={onSubmit} color='#FFDD00' />
 				<Button text='Reiniciar' onPress={onReset} />
 			</View>
+			<AlertError
+				visible={visible}
+				message={error?.message || ''}
+				onClose={closeModal}
+			/>
 		</MainLayout>
 	);
 }

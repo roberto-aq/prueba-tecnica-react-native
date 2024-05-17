@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParams } from '../../navigation/StackNavigator';
 
 import MainLayout from '../../layout/MainLayout';
-import { RootStackParams } from '../../navigation/StackNavigator';
 import {
+	AlertError,
 	Button,
-	FullScreenLoader,
 	ModalConfirmationDelete,
+	ProductListSkeleton,
 	Row,
 } from '../../components';
 import { Formatter } from '../../helpers/formatter';
 import { useDeleteProduct } from '../../hooks';
+import useErrorHandler from '../../hooks/ui/useErrorHandler';
 
 interface Props
 	extends StackScreenProps<RootStackParams, 'Product'> {}
@@ -20,14 +22,27 @@ export default function ProductScreen({ route, navigation }: Props) {
 	const { product } = route.params;
 	const [modalVisible, setModalVisible] = useState(false);
 
-	const { isPending, mutate } = useDeleteProduct();
+	const { isPending, mutate, isError, isSuccess, error } =
+		useDeleteProduct();
+	const { closeModal, visible, setVisible } = useErrorHandler();
 
 	const handleDelete = () => {
 		mutate(product.id);
 		setModalVisible(false);
 	};
 
-	if (isPending) return <FullScreenLoader />;
+	useEffect(() => {
+		if (isError) {
+			setVisible(true);
+		}
+	}, [isError]);
+
+	if (isPending)
+		return (
+			<MainLayout>
+				<ProductListSkeleton />
+			</MainLayout>
+		);
 
 	return (
 		<MainLayout>
@@ -74,6 +89,12 @@ export default function ProductScreen({ route, navigation }: Props) {
 				onConfirm={handleDelete}
 				onCancel={() => setModalVisible(false)}
 				productName={product.name}
+			/>
+
+			<AlertError
+				visible={visible}
+				message={error?.message || ''}
+				onClose={closeModal}
 			/>
 		</MainLayout>
 	);

@@ -17,14 +17,14 @@ export default function ProductList({ products }: Props) {
 					style={
 						index === 0
 							? {
-									borderTopLeftRadius: 10,
-									borderTopEndRadius: 10,
+									borderTopLeftRadius: 6,
+									borderTopEndRadius: 6,
 									borderBottomWidth: products.length === 1 ? 1 : 0,
-									borderRadius: products.length === 1 ? 10 : 0,
+									borderRadius: products.length === 1 ? 6 : 0,
 							  }
 							: index === products.length - 1 && {
-									borderBottomLeftRadius: 10,
-									borderBottomEndRadius: 10,
+									borderBottomLeftRadius: 6,
+									borderBottomEndRadius: 6,
 									borderBottomWidth: 1,
 							  }
 					}

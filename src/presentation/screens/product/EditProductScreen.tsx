@@ -8,6 +8,7 @@ import { RootStackParams } from '../../navigation/StackNavigator';
 import { useEditProduct } from '../../hooks';
 import { Product } from '../../types/Product';
 import {
+	AlertError,
 	Button,
 	DatePicker,
 	FullScreenLoader,
@@ -15,6 +16,7 @@ import {
 } from '../../components';
 import MainLayout from '../../layout/MainLayout';
 import { productValidationRules } from '../../validations/productValidation';
+import useErrorHandler from '../../hooks/ui/useErrorHandler';
 
 interface Props
 	extends StackScreenProps<RootStackParams, 'EditProduct'> {}
@@ -36,7 +38,8 @@ export default function EditProductScreen({ route }: Props) {
 
 	const dateRelease = watch('date_release');
 
-	const { mutate, isPending } = useEditProduct();
+	const { mutate, isPending, isError, error } = useEditProduct();
+	const { closeModal, visible, setVisible } = useErrorHandler();
 
 	useEffect(() => {
 		if (dateRelease) {
@@ -50,6 +53,12 @@ export default function EditProductScreen({ route }: Props) {
 			);
 		}
 	}, [dateRelease, setValue]);
+
+	useEffect(() => {
+		if (isError) {
+			setVisible(true);
+		}
+	}, [isError]);
 
 	const onSubmit = handleSubmit(data => {
 		mutate({ ...data, id: product.id }); // Asegura que el ID no cambie
@@ -119,6 +128,11 @@ export default function EditProductScreen({ route }: Props) {
 				<Button text='Guardar' onPress={onSubmit} color='#FFDD00' />
 				<Button text='Reiniciar' onPress={onReset} />
 			</View>
+			<AlertError
+				visible={visible}
+				message={error?.message || ''}
+				onClose={closeModal}
+			/>
 		</MainLayout>
 	);
 }
