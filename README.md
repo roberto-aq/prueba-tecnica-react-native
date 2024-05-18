@@ -4,14 +4,10 @@
 
 Este proyecto es una aplicación móvil construida con React Native (**EXPO**) para una prueba técnica. La aplicación permite a los usuarios agregar, buscar, editar y eliminar productos. Se sigue el principio de Clean Code y las prácticas de SOLID.
 
-## Badges
-
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen)
-![npm version](https://img.shields.io/badge/npm-6.14.8-blue)
-![Expo Version](https://img.shields.io/badge/expo-41.0.1-blue)
+![npm version](https://img.shields.io/badge/npm-10.6.0-blue)
+![Expo Version](https://img.shields.io/badge/expo-51.0.7-white)
 ![React Native](https://img.shields.io/badge/react--native-0.74.1-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Requisitos Previos
 Es necesario tener instalados los siguientes programas:

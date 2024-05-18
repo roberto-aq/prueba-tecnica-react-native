@@ -18,7 +18,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 interface Props {
 	product: ProductResponse;
-	style: StyleProp<ViewStyle>;
+	style?: StyleProp<ViewStyle>;
 }
 
 export default function ProductItem({ product, style }: Props) {

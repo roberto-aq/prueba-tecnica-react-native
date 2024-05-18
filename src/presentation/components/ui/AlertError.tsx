@@ -40,7 +40,9 @@ export default function AlertError({
 					]}
 				>
 					<Text style={styles.modalTitle}>¡Error!</Text>
-					<Text style={styles.modalText}>{message}</Text>
+					<Text style={styles.modalText} testID='error-message'>
+						{message}
+					</Text>
 					<Pressable style={styles.button} onPress={onClose}>
 						<Ionicons name='close-outline' size={30} color='#333' />
 					</Pressable>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 18,
 		fontWeight: '500',
-		color: "#777"
+		color: '#777',
 	},
 	button: {
 		borderRadius: 999,

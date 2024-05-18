@@ -3,12 +3,17 @@ import Skeleton from './Skeleton';
 
 export default function ProductListSkeleton() {
 	return (
-		<View style={styles.container}>
+		<View style={styles.container} testID='product-list-skeleton'>
 			<View style={styles.skeletonSearch}>
 				<Skeleton width='100%' height={50} />
 			</View>
 			{[...Array(6)].map((_, index) => (
-				<Skeleton key={index} width='100%' height={70} style={{marginBottom: 5}}/>
+				<Skeleton
+					key={index}
+					width='100%'
+					height={70}
+					style={{ marginBottom: 5 }}
+				/>
 			))}
 		</View>
 	);
